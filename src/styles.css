@@ -24,3 +24,12 @@ html, body {
   --logo-max-width: 12rem;
   --button-height: 3rem;
 }
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/roboto-variablefont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900; 
+  font-style: normal;
+}
+* {
+  font-family: 'Roboto', sans-serif;
+}

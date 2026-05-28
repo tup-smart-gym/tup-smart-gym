@@ -1,0 +1,40 @@
+<div class="main-layout">
+
+  <header class="top-bar">
+    <button class="btn-menu" (click)="toggleAppInfo()">☰ Info de la App</button>
+    <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+  </header>
+
+  <main class="main-content">
+    <div class="user-card">
+      <img [src]="user.profilePhoto" alt="Foto de perfil" class="profile-photo">
+      <h1 class="user-name">{{ user.fullName }}</h1>
+      <p class="user-email">{{ user.email }}</p>
+      
+      <hr class="divider">
+      
+      <div class="extra-info">
+        <p><strong>DNI:</strong> {{ user.idNumber }}</p>
+        <p><strong>Localidad:</strong> {{ user.city }}</p>
+      </div>
+    </div>
+  </main>
+
+  <aside class="sidebar" [class.is-open]="showAppInfo">
+    <button class="btn-close" (click)="toggleAppInfo()">×</button>
+    
+    <div class="sidebar-content">
+      <img [src]="gymLogo" alt="Smart Gym Logo" class="large-gym-logo">
+      <h2 class="app-title">{{ appInfo.name }}</h2>
+      <p class="version-text"><strong>Version:</strong> {{ appInfo.version }}</p>
+      
+      <div class="tech-box">
+        <strong>User Agent:</strong>
+        <p class="small-text">{{ appInfo.userAgent }}</p>
+      </div>
+    </div>
+  </aside>
+
+  <div class="dark-overlay" [class.is-visible]="showAppInfo" (click)="toggleAppInfo()"></div>
+
+</div>
