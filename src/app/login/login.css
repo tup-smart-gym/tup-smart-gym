@@ -1,0 +1,201 @@
+@import '@fontsource/bebas-neue';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-bg-accent {
+  position: absolute;
+  top: -8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34rem;
+  height: 34rem;
+  background: radial-gradient(circle, rgba(198, 40, 40, 0.22) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 28rem;
+  padding: 2.5rem 2.25rem 1.75rem;
+  border-radius: 1rem !important;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.7) !important;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.07) !important;
+  position: relative;
+  z-index: 1;
+}
+
+::ng-deep .login-card,
+::ng-deep .login-card .mat-mdc-card {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+.login-header {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  padding: 0 0 1.25rem 0;
+  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.07);
+}
+
+::ng-deep .login-header .mat-mdc-card-header-text {
+  display: none;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: #c62828;
+  overflow: hidden;
+  border: 0.1875rem solid rgba(198, 40, 40, 0.5);
+  box-shadow: 0 0 2rem rgba(198, 40, 40, 0.4);
+  margin-bottom: 0.25rem;
+}
+
+.app-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-fallback-icon {
+  font-size: 2.2rem !important;
+  width: 2.2rem !important;
+  height: 2.2rem !important;
+  color: #ffffff;
+}
+
+.app-name {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Bebas Neue', cursive;
+  line-height: 1;
+}
+
+.app-subtitle {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0.25rem;
+  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.25rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stat-icon {
+  font-size: 1.3rem !important;
+  width: 1.3rem !important;
+  height: 1.3rem !important;
+  color: #c62828;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.stat-divider {
+  width: 0.0625rem;
+  height: 1.75rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.login-content {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0 !important;
+}
+
+.login-button {
+  width: 85%;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #c62828 !important;
+  color: #ffffff !important;
+  border-radius: 0.75rem !important;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 0.25rem 1rem rgba(198, 40, 40, 0.35);
+}
+
+  .login-button:hover:not([disabled]) {
+    background-color: #b71c1c !important;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(198, 40, 40, 0.5);
+  }
+
+  .login-button:active:not([disabled]) {
+    transform: translateY(0);
+    box-shadow: 0 0.25rem 0.75rem rgba(198, 40, 40, 0.3);
+  }
+
+  .login-button[disabled] {
+    opacity: 0.65;
+  }
+
+.button-icon {
+  font-size: 1rem !important;
+  height: 1rem !important;
+  width: 1rem !important;
+}
+
+.login-footer {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.18);
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.04em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}

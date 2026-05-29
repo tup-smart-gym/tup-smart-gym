@@ -1,3 +1,29 @@
+@import '@fontsource/bebas-neue';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #121212;
+}
+
+:root {
+  --bg-color-main: #121212;
+  --card-bg-color: #1e1e1e;
+  --text-color: #ffffff;
+  --primary-red: #c62828;
+  --primary-red-hover: #b71c1c;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --card-max-width: 25rem;
+  --card-border-radius: 0.75rem;
+  --card-padding-y: 2rem;
+  --card-padding-x: 1.5rem;
+  --logo-max-width: 12rem;
+  --button-height: 3rem;
+}
 @font-face {
   font-family: 'Roboto';
   src: url('/fonts/roboto-variablefont_wdth,wght.ttf') format('truetype');
