@@ -1,14 +1,23 @@
+:host {
+  display: block;
+  width: 100vw;       
+  min-height: 100vh;  
+  background-color: #ffffff; 
+}
+
 .members-container {
   max-width: 75rem;
   margin: 0 auto;
   padding: 1.25rem;
   font-family: sans-serif;
+  
 }
 
 .page-title {
   text-align: center;
   margin-bottom: 1.5rem;
   color: #333;
+  color: #ffff;
 }
 
 .filters-bar {
