@@ -1,23 +1,47 @@
-<div class="app-container">
-
+<div class="layout-wrapper">
+  
   <aside class="sidebar">
-    <div class="logo">
-      <img src="assets/logo.png" alt="Smart Gym Logo">
-      <h2>Smart Gym</h2>
-    </div>
-    <nav class="nav-links">
-      <button routerLink="/items">🏋️‍♂️ Ítems</button>
-      <button routerLink="/configuracion">⚙️ Configuración</button>
+    <nav class="nav-menu">
+      <ul>
+        <li (click)="setActiveView('items')" 
+            [class.active]="activeView === 'items'">
+          Items
+        </li>
+        <li (click)="setActiveView('configuration')" 
+            [class.active]="activeView === 'configuration'">
+          Configuration
+        </li>
+      </ul>
     </nav>
   </aside>
 
   <main class="main-content">
-    <router-outlet></router-outlet>
+    <div class="content-container">
+      
+      <section class="view-section">
+        <h1>Items View</h1>
+        <p>This is where your items will be displayed.</p>
+        </section>
+
+      <section class="view-section">
+        <h1>Configuration View</h1>
+        <p>This is where your settings will go.</p>
+        </section>
+
+    </div>
   </main>
 
   <nav class="bottom-bar">
-    <button routerLink="/items">🏋️‍♂️</button>
-    <button routerLink="/configuracion">⚙️</button>
+    <ul class="nav-menu-bottom">
+      <li (click)="setActiveView('items')" 
+          [class.active]="activeView === 'items'">
+        Items
+      </li>
+      <li (click)="setActiveView('configuration')" 
+          [class.active]="activeView === 'configuration'">
+        Configuration
+      </li>
+    </ul>
   </nav>
 
 </div>

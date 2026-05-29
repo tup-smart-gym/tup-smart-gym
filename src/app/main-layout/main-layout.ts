@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-main-layout',
-  imports: [RouterModule],
+  selector: 'app-layout',
   templateUrl: './main-layout.html',
-  styleUrl: './main-layout.css',
+  styleUrls: ['./main-layout.css']
 })
-export class MainLayout {}
+export class LayoutComponent {
+  // Default view is set to 'items'
+  activeView: string = 'items';
+
+  // Method to switch between views
+  setActiveView(view: string): void {
+    this.activeView = view;
+  }
+}

@@ -1,0 +1,61 @@
+<div class="members-container">
+  <h2 class="page-title">Miembros del Gimnasio</h2>
+
+  <div class="filters-bar">
+    <div class="search-field">
+      <input 
+        type="text" 
+        placeholder="Buscar por nombre, apellido o localidad..."
+        [(ngModel)]="filterText"
+        (input)="applyFilterAndSort()"
+      />
+    </div>
+    
+    <div class="sort-field">
+      <select [(ngModel)]="sortBy" (change)="applyFilterAndSort()">
+        <option value="">Ordenar por...</option>
+        <option value="name">Nombre (A-Z)</option>
+        <option value="lastName">Apellido (A-Z)</option>
+        <option value="age">Edad (Menor a Mayor)</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-status">
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <p>Obteniendo miembros del gimnasio...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <span> {{ errorMessage }}</span>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage" class="members-grid">
+    
+    <div class="member-card" *ngFor="let member of filteredMembers">
+      <div class="card-header">
+        <img [src]="member.picture.large" [alt]="member.name.first" />
+      </div>
+      
+      <div class="card-body">
+        <h3 class="member-name">{{ member.name.first }} {{ member.name.last }}</h3>
+        
+        <p class="member-info"><strong>Edad:</strong> {{ member.dob.age }} años</p>
+        <p class="member-info"><strong>Email:</strong> <span class="truncate">{{ member.email }}</span></p>
+        <p class="member-info"><strong>Teléfono:</strong> {{ member.phone }}</p>
+        
+        <p class="member-location">
+          <strong>Ubicación:</strong><br>
+          {{ member.location.country }} - {{ member.location.state }} - {{ member.location.city }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && filteredMembers.length === 0" class="no-results">
+    <p>No se encontraron miembros que coincidan con la búsqueda.</p>
+  </div>
+</div>
