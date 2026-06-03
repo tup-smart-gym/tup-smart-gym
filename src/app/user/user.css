@@ -1,7 +1,5 @@
 :host {
   display: block;
-  width: 100vw;       
-  min-height: 100vh;  
   background-color: #ffffff; 
 }
 
@@ -10,7 +8,6 @@
   margin: 0 auto;
   padding: 1.25rem;
   font-family: sans-serif;
-  
 }
 
 .page-title {
@@ -41,7 +38,7 @@
 .filters-bar select {
   width: 100%;
   padding: 0.5rem;
-  border: 0.5rem solid #ccc;
+  border: 0.05rem solid #ccc;
   border-radius: 0.25rem;
   font-size: 1rem;
   box-sizing: border-box;
@@ -64,7 +61,7 @@
   background-color: #f8d7da;
   color: #721c24;
   padding: 1rem;
-  border-radius: 0,25rem;
+  border-radius: 0.25rem;
   border: 0.005rem solid #f5c6cb;
   text-align: center;
   margin-bottom: 1.25rem;
@@ -78,14 +75,14 @@
 
 .members-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  gap: 1.5rem;
 }
 
 .member-card {
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 0.5rem #0000;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;

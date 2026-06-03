@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent {
   user = {
-    fullName: 'Elisa Ramos Farinho',
-    email: 'elisaramosfarinho@smartgym.com',
+    fullName: 'Lionel Messi',
+    email: 'lionelmessi@smartgym.com',
     profilePhoto: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-    idNumber: '47.551.850',
+    idNumber: '34.789.235',
     city: 'La Plata'
   };
 

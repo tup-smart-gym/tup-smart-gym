@@ -3,13 +3,11 @@
   <aside class="sidebar">
     <nav class="nav-menu">
       <ul>
-        <li (click)="setActiveView('items')" 
-            [class.active]="activeView === 'items'">
+        <li routerLink="/main/users" routerLinkActive="active">
           Items
         </li>
-        <li (click)="setActiveView('configuration')" 
-            [class.active]="activeView === 'configuration'">
-          Configuration
+        <li routerLink="/main/settings" routerLinkActive="active">
+          Configuracion
         </li>
       </ul>
     </nav>
@@ -18,28 +16,19 @@
   <main class="main-content">
     <div class="content-container">
       
-      <section class="view-section">
-        <h1>Items View</h1>
-        <p>This is where your items will be displayed.</p>
-        </section>
-
-      <section class="view-section">
-        <h1>Configuration View</h1>
-        <p>This is where your settings will go.</p>
-        </section>
+      <!-- where angular draws the children component -->
+      <router-outlet></router-outlet>
 
     </div>
   </main>
 
   <nav class="bottom-bar">
     <ul class="nav-menu-bottom">
-      <li (click)="setActiveView('items')" 
-          [class.active]="activeView === 'items'">
+      <li routerLink="/main/users" routerLinkActive="active">
         Items
       </li>
-      <li (click)="setActiveView('configuration')" 
-          [class.active]="activeView === 'configuration'">
-        Configuration
+      <li routerLink="/main/settings" routerLinkActive="active">
+        Configuracion
       </li>
     </ul>
   </nav>

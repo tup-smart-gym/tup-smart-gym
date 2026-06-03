@@ -6,9 +6,15 @@ import { LoginComponent } from './login/login';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'main', component: LayoutComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: '**', redirectTo: '/login' },
+  { 
+    path: 'main', 
+    component: LayoutComponent,
+    children: [
+      { path: 'users', component: UsersComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: '', redirectTo: 'users', pathMatch: 'full' }
+    ]
+  },
+  { path: '**', redirectTo: '/login' }, 
 ];

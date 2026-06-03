@@ -3,7 +3,7 @@
   display: flex;
   height: 100vh;
   width: 100vw;
-  background-color: #f4f5f7; /* Light gray background */
+  background-color: #f4f5f7; 
   overflow: hidden;
 }
 
@@ -18,23 +18,23 @@
 .nav-menu li,
 .nav-menu-bottom li {
   cursor: pointer;
-  font-size: 1rem; /* 16px equivalent */
-  color: #505d69; /* Dark gray text */
+  font-size: 1rem; /* 16px */
+  color: #505d69; 
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &.active {
-    color: #ffffff; /* White text */
-    background-color: #d32f2f; /* Primary Blue */
+    color: #ffffff;
+    background-color: #d32f2f;
     font-weight: bold;
   }
 }
 
-/* --- Sidebar (Hidden on Mobile by default) --- */
+/* --- Sidebar --- */
 .sidebar {
-  display: none; /* Hidden below 48rem */
-  width: 15.625rem; /* 250px equivalent */
+  display: none; 
+  width: 15.625rem; /* 250px */
   background-color: #ffffff;
-  border-right: 0.0625rem solid #e1e5eb; /* 1px equivalent */
+  border-right: 0.0625rem solid #e1e5eb; /* 1px */
   box-shadow: 0.125rem 0 0.3125rem rgba(0, 0, 0, 0.05);
   
   .nav-menu {
@@ -56,19 +56,17 @@
   flex: 1;
   overflow-y: auto;
   padding: 2rem; /* 32px */
-  /* Extra bottom padding on mobile to prevent content hiding behind bottom bar */
   padding-bottom: 6rem; 
 }
 
 .content-container {
-  max-width: 75rem; /* 1200px limit for readability */
-  margin: 0 auto;
+  max-width: 75rem; /* 1200px */
 }
 
 .view-section {
   background-color: #ffffff;
   padding: 1.5rem;
-  border-radius: 0.5rem; /* 8px rounded corners */
+  border-radius: 0.5rem; /* 8px */
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
 
   h1 {
@@ -78,9 +76,9 @@
   }
 }
 
-/* --- Bottom Bar (Visible on Mobile by default) --- */
+/* --- Bottom Bar --- */
 .bottom-bar {
-  display: block; /* Visible below 48rem */
+  display: block; 
   position: fixed;
   bottom: 0;
   left: 0;
@@ -110,17 +108,16 @@
 }
 
 /* --- Responsive Media Queries --- */
-/* For screens larger than 768px (48rem) */
 @media (min-width: 48rem) {
   .sidebar {
-    display: block; /* Show Sidebar */
+    display: block; 
   }
 
   .bottom-bar {
-    display: none; /* Hide Bottom Bar */
+    display: none; 
   }
 
   .main-content {
-    padding-bottom: 2rem; /* Reset padding since there is no bottom bar */
+    padding-bottom: 2rem; 
   }
 }
