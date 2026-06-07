@@ -30,6 +30,7 @@ export class SettingsComponent {
   logout() {
     const isConfirmed = window.confirm("Are you sure you want to log out of Smart Gym?");
     if (isConfirmed) {
+      sessionStorage.removeItem('session_active');
       this.router.navigate(['/login']);
     }
   }
