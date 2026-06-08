@@ -1,0 +1,36 @@
+<div class="layout-wrapper">
+  
+  <aside class="sidebar">
+    <nav class="nav-menu">
+      <ul>
+        <li routerLink="/main/users" routerLinkActive="active">
+          Items
+        </li>
+        <li routerLink="/main/settings" routerLinkActive="active">
+          Configuracion
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <div class="content-container">
+      
+      <!-- where angular draws the children component -->
+      <router-outlet></router-outlet>
+
+    </div>
+  </main>
+
+  <nav class="bottom-bar">
+    <ul class="nav-menu-bottom">
+      <li routerLink="/main/users" routerLinkActive="active">
+        Items
+      </li>
+      <li routerLink="/main/settings" routerLinkActive="active">
+        Configuracion
+      </li>
+    </ul>
+  </nav>
+
+</div>
