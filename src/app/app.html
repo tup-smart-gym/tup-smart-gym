@@ -1,1 +1,4 @@
+@if (auth.error$ | async; as error) {
+  <p class="login-error">Error: {{ error.message }}</p>
+}
 <router-outlet></router-outlet>
