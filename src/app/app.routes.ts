@@ -3,11 +3,9 @@ import { authGuardFn } from '@auth0/auth0-angular';
 import { UsersComponent } from './user/user';
 import { SettingsComponent } from './components/settings/settings'; 
 import { LayoutComponent } from './main-layout/main-layout';
-import { LoginComponent } from './login/login';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   { 
     path: 'main', 
     component: LayoutComponent,
@@ -18,5 +16,5 @@ export const routes: Routes = [
       { path: '', redirectTo: 'users', pathMatch: 'full' }
     ]
   },
-  { path: '**', component: LoginComponent }, 
+  { path: '**', redirectTo: '/main' },
 ];
