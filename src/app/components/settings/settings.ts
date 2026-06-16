@@ -1,20 +1,15 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-settings', 
   standalone: true, 
+  imports: [CommonModule],
   templateUrl: './settings.html', 
   styleUrls: ['./settings.css']
 })
 export class SettingsComponent {
-  user = {
-    fullName: 'Lionel Messi',
-    email: 'lionelmessi@smartgym.com',
-    profilePhoto: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-    idNumber: '34.789.235',
-    city: 'La Plata'
-  };
 
   appInfo = {
     name: 'SMART GYM',
@@ -25,13 +20,16 @@ export class SettingsComponent {
   gymLogo = '/logo.jpeg'; 
   showAppInfo = false; 
 
-  constructor(private router: Router) {}
+  constructor(public auth: AuthService) {}
 
   logout() {
     const isConfirmed = window.confirm("Are you sure you want to log out of Smart Gym?");
     if (isConfirmed) {
-      sessionStorage.removeItem('session_active');
-      this.router.navigate(['/login']);
+      this.auth.logout({
+        logoutParams: {
+          returnTo: document.location.origin
+        }
+      });
     }
   }
 
