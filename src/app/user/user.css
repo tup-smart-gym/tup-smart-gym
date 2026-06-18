@@ -75,7 +75,7 @@
 
 .members-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
   gap: 1.5rem;
 }
 
@@ -91,7 +91,7 @@
 
 .card-header img {
   width: 100%;
-  height: 12.5rem;
+  height: 8rem;
   object-fit: cover;
   display: block;
 }
