@@ -1,0 +1,40 @@
+{
+  "LOGIN": {
+    "SUBTITLE": "Entrenás con inteligencia",
+    "STAT_ROUTINES": "Rutinas",
+    "STAT_PROGRESS": "Progreso",
+    "STAT_ACHIEVEMENTS": "Logros",
+    "BUTTON": "Iniciar sesión",
+    "FOOTER": "Al continuar aceptás los términos de uso"
+  },
+  "MAIN_LAYOUT": {
+    "NAV_ITEMS": "Items",
+    "NAV_SETTINGS": "Configuración"
+  },
+  "SETTINGS": {
+    "BUTTON_INFO": "☰ Info de la App",
+    "BUTTON_LOGOUT": "Cerrar Sesión",
+    "PHOTO_ALT": "Foto de perfil",
+    "DNI": "DNI",
+    "CITY": "Localidad",
+    "VERSION": "Versión",
+    "USER_AGENT": "User Agent",
+    "LOGOUT_CONFIRM": "¿Estás seguro de que querés cerrar sesión en Smart Gym?",
+    "LOGO_ALT": "Smart Gym Logo"
+  },
+  "USERS": {
+    "TITLE": "Miembros del Gimnasio",
+    "SEARCH_PLACEHOLDER": "Buscar por nombre, apellido o localidad...",
+    "SORT_DEFAULT": "Ordenar por...",
+    "SORT_NAME": "Nombre (A-Z)",
+    "SORT_LASTNAME": "Apellido (A-Z)",
+    "SORT_AGE": "Edad (Menor a Mayor)",
+    "LOADING": "Obteniendo miembros del gimnasio...",
+    "AGE": "Edad",
+    "YEARS": "años",
+    "EMAIL": "Email",
+    "PHONE": "Teléfono",
+    "LOCATION": "Ubicación",
+    "NO_RESULTS": "No se encontraron miembros que coincidan con la búsqueda."
+  }
+}

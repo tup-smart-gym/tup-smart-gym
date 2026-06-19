@@ -1,13 +1,12 @@
 <div class="layout-wrapper">
-  
   <aside class="sidebar">
     <nav class="nav-menu">
       <ul>
         <li routerLink="/main/users" routerLinkActive="active">
-          Items
+          {{ 'MAIN_LAYOUT.NAV_ITEMS' | translate }}
         </li>
         <li routerLink="/main/settings" routerLinkActive="active">
-          Configuracion
+          {{ 'MAIN_LAYOUT.NAV_SETTINGS' | translate }}
         </li>
       </ul>
     </nav>
@@ -15,22 +14,18 @@
 
   <main class="main-content">
     <div class="content-container">
-      
-      <!-- where angular draws the children component -->
       <router-outlet></router-outlet>
-
     </div>
   </main>
 
   <nav class="bottom-bar">
     <ul class="nav-menu-bottom">
       <li routerLink="/main/users" routerLinkActive="active">
-        Items
+        {{ 'MAIN_LAYOUT.NAV_ITEMS' | translate }}
       </li>
       <li routerLink="/main/settings" routerLinkActive="active">
-        Configuracion
+        {{ 'MAIN_LAYOUT.NAV_SETTINGS' | translate }}
       </li>
     </ul>
   </nav>
-
 </div>
