@@ -6,18 +6,7 @@
   </header>
 
   <main class="main-content">
-    <div class="user-card" *ngIf="auth.user$ | async as user">
-      <img [src]="user.picture" alt="Foto de perfil" class="profile-photo">
-      <h1 class="user-name">{{ user.name }}</h1>
-      <p class="user-email">{{ user.email }}</p>
-      
-      <hr class="divider">
-      
-      <div class="extra-info">
-        <p><strong>DNI:</strong> (To load from data base)</p>
-        <p><strong>Localidad:</strong> (To load from data base)</p>
-      </div>
-    </div>
+    <app-user-profile></app-user-profile>
   </main>
 
   <aside class="sidebar" [class.is-open]="showAppInfo">
