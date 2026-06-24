@@ -36,9 +36,22 @@
   background-color: #ffffff;
   border-right: 0.0625rem solid #e1e5eb; /* 1px */
   box-shadow: 0.125rem 0 0.3125rem rgba(0, 0, 0, 0.05);
+
+  .sidebar-header {
+    padding: 2rem 1.5rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .app-logo {
+      max-width: 100%;
+      height: auto;
+      max-height: 7.5rem;
+    }
+  }
   
   .nav-menu {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
 
   li {
