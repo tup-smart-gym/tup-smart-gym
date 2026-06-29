@@ -1,0 +1,71 @@
+<div class="rooms-container">
+  <h2 class="page-title">Salas</h2>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Buscar sala..."
+      [(ngModel)]="filterText"
+      (input)="applyFilter()"
+    />
+    <button class="btn-add" (click)="openAddModal()">+ Agregar</button>
+  </div>
+
+  @if (rooms.length === 0) {
+    <p class="empty-message">No hay salas cargadas todavía.</p>
+  }
+
+  @if (filteredRooms.length === 0 && filterText) {
+    <p class="empty-message">No se encontraron salas que coincidan con la búsqueda.</p>
+  }
+
+  <div class="rooms-grid">
+    @for (room of filteredRooms; track room.id) {
+      <div class="room-card">
+        <h3 class="room-name">{{ room.name }}</h3>
+        <div class="card-actions">
+          <button class="btn-edit" (click)="openEditModal(room)">Editar</button>
+          <button class="btn-delete" (click)="deleteRoom(room.id)">Eliminar</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Add Modal -->
+@if (showAddModal) {
+  <div class="modal-overlay" (click)="cancelAdd()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3 class="modal-title">Agregar sala</h3>
+      <input
+        type="text"
+        class="modal-input"
+        placeholder="Nombre de la sala"
+        [(ngModel)]="newRoomName"
+      />
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="cancelAdd()">Cancelar</button>
+        <button class="btn-confirm" (click)="confirmAdd()">Agregar</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Edit Modal -->
+@if (showEditModal) {
+  <div class="modal-overlay" (click)="cancelEdit()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3 class="modal-title">Editar sala</h3>
+      <input
+        type="text"
+        class="modal-input"
+        [(ngModel)]="editingName"
+      />
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="cancelEdit()">Cancelar</button>
+        <button class="btn-confirm" (click)="confirmEdit()">Guardar</button>
+      </div>
+    </div>
+  </div>
+}
