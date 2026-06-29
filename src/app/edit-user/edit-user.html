@@ -1,0 +1,55 @@
+<mat-card class="perfil-card">
+  <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo</mat-label>
+      <input matInput formControlName="correo" type="email">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="outline">
+      <mat-label>DNI</mat-label>
+      <input matInput formControlName="dni">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput formControlName="fechaNacimiento" type="date">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion">
+    </mat-form-field>
+
+    <div formArrayName="telefonos">
+      <h3>Teléfonos</h3>
+      <div *ngFor="let telefono of telefonos.controls; let i = index">
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono {{ i + 1 }}</mat-label>
+          <input matInput [formControlName]="i">
+        </mat-form-field>
+
+        <button mat-icon-button color="warn" type="button" 
+                (click)="eliminarTelefono(i)" 
+                *ngIf="telefonos.length > 1">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      
+      <button mat-stroked-button type="button" (click)="agregarTelefono()">
+        + Agregar otro teléfono
+      </button>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="perfilForm.invalid">
+      Guardar Cambios
+    </button>
+  </form>
+</mat-card>
