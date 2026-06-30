@@ -1,0 +1,87 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="card-header">
+      @if (!isEditing) {
+        <button class="btn-edit" (click)="startEditing()">Editar</button>
+      }
+    </div>
+    <div class="profile-identity">
+      <img 
+        [src]="imagen" 
+        [alt]="nombre" 
+        class="avatar"
+        (error)="imagen = 'https://ui-avatars.com/api/?name=' + nombre + '&background=c0392b&color=fff&size=128'"
+      />
+      <h2 class="profile-name">{{ nombre }}</h2>
+      <p class="profile-email">{{ email }}</p>
+    </div>
+    @if (!isEditing) {
+      <div class="profile-details">
+        <p class="detail-item"><strong>DNI:</strong> {{ dni || 'No cargado' }}</p>
+        <p class="detail-item"><strong>Fecha de nacimiento:</strong> {{ fechaNacimiento || 'No cargada' }}</p>
+        <p class="detail-item"><strong>Dirección:</strong> {{ direccion || 'No cargada' }}</p>
+        <p class="detail-item"><strong>Teléfonos:</strong> {{ telefonos.join(', ') || 'No cargados' }}</p>
+      </div>
+    }
+    @if (isEditing) {
+      <div class="edit-form">
+
+        @if (errorMessage) {
+          <p class="error-message">{{ errorMessage }}</p>
+        }
+
+        <div class="form-group">
+          <label>DNI</label>
+          <input
+            type="text"
+            inputmode="numeric"
+            [ngModel]="dni"
+            (input)="onDniInput($event)"
+            [maxlength]="DNI_MAX"
+            placeholder="Ingresá tu DNI"
+          />
+        </div>
+        <div class="form-group">
+          <label>Fecha de nacimiento</label>
+          <input
+            type="date"
+            [(ngModel)]="fechaNacimiento"
+            [max]="fechaMaxima"
+          />
+        </div>
+        <div class="form-group">
+          <label>Dirección</label>
+          <input
+            type="text"
+            [(ngModel)]="direccion"
+            [maxlength]="DIR_MAX"
+            placeholder="Ingresá tu dirección"
+          />
+        </div>
+        <div class="form-group">
+          <label>Teléfonos</label>
+          @for (tel of telefonos; track trackByIndex($index)) {
+            <div class="telefono-row">
+              <input
+                type="tel"
+                inputmode="numeric"
+                [ngModel]="telefonos[$index]"
+                (input)="onTelefonoInput($event, $index)"
+                [maxlength]="TEL_MAX"
+                placeholder="Número de teléfono"
+              />
+              @if (telefonos.length > 1) {
+                <button class="btn-remove" (click)="removeTelefono($index)">✕</button>
+              }
+            </div>
+          }
+          <button class="btn-add-tel" (click)="addTelefono()">+ Agregar teléfono</button>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" (click)="cancelEditing()">Cancelar</button>
+          <button class="btn-save" (click)="saveChanges()">Guardar</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
