@@ -21,7 +21,6 @@ export class UserProfileComponent implements OnInit {
 
   errorMessage: string = '';
 
-  // Límites de validación
   readonly DNI_MIN = 6;
   readonly DNI_MAX = 8;
   readonly TEL_MIN = 10;
@@ -29,7 +28,6 @@ export class UserProfileComponent implements OnInit {
   readonly DIR_MIN = 2;
   readonly DIR_MAX = 128;
 
-  // Fecha máxima permitida (hoy), para el atributo [max] del input date
   fechaMaxima: string = new Date().toISOString().split('T')[0];
 
   private tempDni: string = '';
@@ -67,7 +65,6 @@ export class UserProfileComponent implements OnInit {
     this.isEditing = false;
   }
 
-  // Filtra cualquier carácter no numérico mientras el usuario escribe el DNI
   onDniInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     let valor = input.value.replace(/\D/g, '');
@@ -78,7 +75,6 @@ export class UserProfileComponent implements OnInit {
     input.value = valor;
   }
 
-  // Filtra cualquier carácter no numérico mientras el usuario escribe un teléfono
   onTelefonoInput(event: Event, index: number): void {
     const input = event.target as HTMLInputElement;
     let valor = input.value.replace(/\D/g, '');
@@ -90,7 +86,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   private validarFormulario(): boolean {
-    // Campos vacíos
     if (!this.dni.trim() || !this.fechaNacimiento.trim() || !this.direccion.trim()) {
       this.errorMessage = 'No se pueden guardar campos vacíos.';
       return false;
@@ -100,13 +95,11 @@ export class UserProfileComponent implements OnInit {
       return false;
     }
 
-    // DNI
     if (this.dni.length < this.DNI_MIN || this.dni.length > this.DNI_MAX) {
       this.errorMessage = `El DNI debe tener entre ${this.DNI_MIN} y ${this.DNI_MAX} dígitos.`;
       return false;
     }
 
-    // Teléfonos
     for (const tel of this.telefonos) {
       if (tel.length < this.TEL_MIN || tel.length > this.TEL_MAX) {
         this.errorMessage = `Cada teléfono debe tener entre ${this.TEL_MIN} y ${this.TEL_MAX} dígitos.`;
@@ -114,13 +107,11 @@ export class UserProfileComponent implements OnInit {
       }
     }
 
-    // Dirección
     if (this.direccion.length < this.DIR_MIN || this.direccion.length > this.DIR_MAX) {
       this.errorMessage = `La dirección debe tener entre ${this.DIR_MIN} y ${this.DIR_MAX} caracteres.`;
       return false;
     }
 
-    // Fecha de nacimiento no puede ser futura
     if (this.fechaNacimiento > this.fechaMaxima) {
       this.errorMessage = 'La fecha de nacimiento no puede ser posterior a hoy.';
       return false;
