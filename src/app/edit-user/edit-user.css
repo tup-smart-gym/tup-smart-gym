@@ -1,0 +1,21 @@
+.perfil-card {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-divider {
+  margin: 20px 0;
+}
