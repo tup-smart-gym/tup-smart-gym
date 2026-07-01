@@ -16,20 +16,16 @@ export class StorageService {
     localStorage.setItem(this.CACHE_KEY, JSON.stringify(payload));
   }
 
-  get(): Member[] {
+  get(): Member[] | null {
     const item = localStorage.getItem(this.CACHE_KEY);
-    return item ? JSON.parse(item).data : [];
-  }
+    if(!item) return null;
 
-  isValid(): boolean {
-    const item = localStorage.getItem(this.CACHE_KEY);
-    if (!item) return false;
-
-    try {
+    try{
       const parsed = JSON.parse(item);
-      return Date.now() - parsed.timestamp < this.TTL;
-    } catch {
-      return false;
+      const isValid = Date.now() - parsed.timestamp < this.TTL;
+      return isValid ? parsed.data : null;
+    } catch{
+      return null;
     }
   }
 

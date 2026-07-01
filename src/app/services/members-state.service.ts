@@ -12,10 +12,12 @@ export class MembersStateService {
   private api = inject(MembersApiService);
 
   getMembers(): Observable<Member[]> {
-    if (this.storage.isValid()) {
-      return of(this.storage.get());
-    } else {
-      return this.api.fetchMembers().pipe(tap((data: Member[]) => this.storage.set(data)));
+    const cached = this.storage.get();
+
+    if(cached){
+      return of(cached);
     }
+
+    return this.api.fetchMembers().pipe(tap((data: Member[])=> this.storage.set(data)));
   }
 }
