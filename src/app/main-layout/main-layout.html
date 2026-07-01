@@ -1,5 +1,4 @@
 <div class="layout-wrapper">
-  
   <aside class="sidebar">
     <div class="sidebar-header">
       <img src="/logo.jpeg" alt="Logo TUP Smart Gym" class="app-logo">
@@ -8,10 +7,10 @@
     <nav class="nav-menu">
       <ul>
         <li routerLink="/main/users" routerLinkActive="active">
-          Socios
+          {{ 'MAIN_LAYOUT.NAV_ITEMS' | translate }}
         </li>
         <li routerLink="/main/settings" routerLinkActive="active">
-          Configuracion
+          {{ 'MAIN_LAYOUT.NAV_SETTINGS' | translate }}
         </li>
         <li routerLink="/main/rooms" routerLinkActive="active">Salas</li>
       </ul>
@@ -22,20 +21,18 @@
     <div class="content-container">
       
       <router-outlet></router-outlet>
-
     </div>
   </main>
 
   <nav class="bottom-bar">
     <ul class="nav-menu-bottom">
       <li routerLink="/main/users" routerLinkActive="active">
-        Socios
+        {{ 'MAIN_LAYOUT.NAV_ITEMS' | translate }}
       </li>
       <li routerLink="/main/settings" routerLinkActive="active">
-        Configuracion
+        {{ 'MAIN_LAYOUT.NAV_SETTINGS' | translate }}
       </li>
       <li routerLink="/main/rooms" routerLinkActive="active">Salas</li>
     </ul>
   </nav>
-
 </div>
