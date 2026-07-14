@@ -67,6 +67,8 @@
   font-size: 0.95rem;
   color: #333;
   margin: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .edit-form {
