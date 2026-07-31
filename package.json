@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lighthouse": "lhci autorun --collect.url=http://localhost:4200 --collect.numberOfRuns=1",
+    "esbuild-visualizer": "ng build --stats-json && esbuild-visualizer --metadata ./dist/tup-smart-gym/stats.json --filename ./reports/bundle-report.html"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
