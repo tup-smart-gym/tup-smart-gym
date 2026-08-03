@@ -2,16 +2,18 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #f0f0f0;
   overflow-x: hidden; 
 }
 
 .top-bar {
-  background-color: transparent;
-  height: 4.375rem; 
+  background-color: #ffffff;
+  height: 4.375rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1.875rem;
+  box-shadow: 0 0.25rem 0.375rem #0000000d;
 }
 
 .btn-menu {
@@ -39,6 +41,7 @@
 
 .btn-logout:hover { background-color: #b0151b; }
 
+/* --- MAIN CONTENT --- */
 .main-content {
   flex-grow: 1;
   display: flex;
@@ -47,15 +50,14 @@
   padding: 1.25rem; 
 }
 
-.user-card {
-  background-color: #ffffff;
+app-user-profile {
   width: 100%;
-  max-width: 28.125rem; 
-  padding: 2.5rem; 
-  border-radius: 0.75rem; 
+  max-width: 28.125rem;
+  padding: 2.5rem;
+  border-radius: 0.75rem;
   text-align: center;
-  box-shadow: 0 0.625rem 1.25rem #00000014; 
-  border-top: 0.375rem solid #e31b23; 
+  box-shadow: 0 0.625rem 1.25rem #00000014;
+  border-top: 0.375rem solid #e31b23;
 }
 
 .profile-photo {
@@ -92,28 +94,29 @@
 .extra-info p { margin: 0.625rem 0; }
 .extra-info strong { color: #e31b23; }
 
+/* --- SIDEBAR --- */
 .sidebar {
   position: fixed;
   top: 0;
   left: -25rem; 
   width: 21.875rem; 
   height: 100vh;
-  background-color: #111111; 
+  background-color: #111111;
   color: #ffffff;
-  z-index: 1000; 
-  box-shadow: 0.3125rem 0 0.9375rem #00000080; 
+  z-index: 1000;
+  box-shadow: 0.3125rem 0 0.9375rem #00000080;
   transition: left 0.4s ease-in-out;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar.is-open {
-  left: 0; 
+  left: 0;
 }
 
 .btn-close {
   align-self: flex-end;
-  background: #00000000; 
+  background: #00000000;
   color: #cccccc;
   border: none;
   font-size: 2.1875rem; 
@@ -164,10 +167,10 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #00000099; 
+  background-color: #00000099;
   z-index: 900;
-  opacity: 0; 
-  pointer-events: none; 
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s ease;
 }
 
