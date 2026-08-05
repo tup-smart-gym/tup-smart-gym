@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { CommonModule } from '@angular/common';
+import { Analytics } from '../../services/analytics';
 import { UserProfileComponent } from '../user-profile/user-profile';
 
 @Component({
@@ -11,6 +12,8 @@ import { UserProfileComponent } from '../user-profile/user-profile';
   styleUrls: ['./settings.css']
 })
 export class SettingsComponent {
+  protected readonly auth = inject(AuthService);
+  protected readonly analytics = inject(Analytics)
 
   appInfo = {
     name: 'SMART GYM',
@@ -21,11 +24,11 @@ export class SettingsComponent {
   gymLogo = '/logo.jpeg'; 
   showAppInfo = false; 
 
-  constructor(public auth: AuthService) {}
 
   logout() {
     const isConfirmed = window.confirm("Are you sure you want to log out of Smart Gym?");
     if (isConfirmed) {
+      this.analytics.trackFeatureAction('loguot_click');
       this.auth.logout({
         logoutParams: {
           returnTo: document.location.origin
