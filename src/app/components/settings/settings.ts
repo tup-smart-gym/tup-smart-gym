@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { CommonModule } from '@angular/common';
 import { Analytics } from '../../services/analytics';
+import { UserProfileComponent } from '../user-profile/user-profile';
 
 @Component({
   selector: 'app-settings', 
   standalone: true, 
-  imports: [CommonModule],
+  imports: [CommonModule, UserProfileComponent],
   templateUrl: './settings.html', 
   styleUrls: ['./settings.css']
 })
