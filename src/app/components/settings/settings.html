@@ -11,26 +11,7 @@
   </header>
 
   <main class="main-content">
-    <div class="user-card">
-      <img
-        [src]="user.profilePhoto"
-        [alt]="'SETTINGS.PHOTO_ALT' | translate"
-        class="profile-photo"
-      />
-      <h1 class="user-name">{{ user.fullName }}</h1>
-      <p class="user-email">{{ user.email }}</p>
-
-      <hr class="divider" />
-
-      <div class="extra-info">
-        <p>
-          <strong>{{ 'SETTINGS.DNI' | translate }}:</strong> {{ user.idNumber }}
-        </p>
-        <p>
-          <strong>{{ 'SETTINGS.CITY' | translate }}:</strong> {{ user.city }}
-        </p>
-      </div>
-    </div>
+    <app-user-profile></app-user-profile>
   </main>
 
   <aside class="sidebar" [class.is-open]="showAppInfo">

@@ -1,26 +1,18 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { UserProfileComponent } from '../user-profile/user-profile';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [CommonModule, UserProfileComponent, TranslatePipe],
   templateUrl: './settings.html',
   styleUrls: ['./settings.css'],
 })
 export class SettingsComponent {
-  private router = inject(Router);
   private translate = inject(TranslateService);
-
-  user = {
-    fullName: 'Lionel Messi',
-    email: 'lionelmessi@smartgym.com',
-    profilePhoto:
-      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-    idNumber: '34.789.235',
-    city: 'La Plata',
-  };
 
   appInfo = {
     name: 'SMART GYM',
@@ -31,11 +23,16 @@ export class SettingsComponent {
   gymLogo = '/logo.jpeg';
   showAppInfo = false;
 
+  constructor(public auth: AuthService) {}
+
   logout() {
     const msg = this.translate.instant('SETTINGS.LOGOUT_CONFIRM');
     if (window.confirm(msg)) {
-      sessionStorage.removeItem('session_active');
-      this.router.navigate(['/login']);
+      this.auth.logout({
+        logoutParams: {
+          returnTo: document.location.origin,
+        },
+      });
     }
   }
 
