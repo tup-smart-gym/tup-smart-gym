@@ -1,59 +1,76 @@
-<h1 class="panel-title">Socios</h1>
+<div class="members-container">
+  <h2 class="page-title">{{ 'USERS.TITLE' | translate }}</h2>
 
   <div class="filters-bar">
     <div class="search-field">
-      <input 
-        type="text" 
-        placeholder="Buscar por nombre, apellido o localidad..."
+      <input
+        type="text"
+        [placeholder]="'USERS.SEARCH_PLACEHOLDER' | translate"
         [(ngModel)]="filterText"
         (input)="applyFilterAndSort()"
       />
     </div>
-    
+
     <div class="sort-field">
       <select [(ngModel)]="sortBy" (change)="applyFilterAndSort()">
-        <option value="">Ordenar por...</option>
-        <option value="name">Nombre (A-Z)</option>
-        <option value="lastName">Apellido (A-Z)</option>
-        <option value="age">Edad (Menor a Mayor)</option>
+        <option value="">{{ 'USERS.SORT_DEFAULT' | translate }}</option>
+        <option value="name">{{ 'USERS.SORT_NAME' | translate }}</option>
+        <option value="lastName">{{ 'USERS.SORT_LASTNAME' | translate }}</option>
+        <option value="age">{{ 'USERS.SORT_AGE' | translate }}</option>
       </select>
     </div>
   </div>
 
-  <div *ngIf="isLoading" class="loading-status">
-    <div class="spinner">
-      <mat-spinner></mat-spinner>
-    </div>
-    <p>Obteniendo miembros del gimnasio...</p>
-  </div>
-
-  <div *ngIf="errorMessage" class="error-message">
-    <span> {{ errorMessage }}</span>
-  </div>
-
-  <div *ngIf="!isLoading && !errorMessage" class="members-grid">
-    
-    <div class="member-card" *ngFor="let member of filteredMembers">
-      <div class="card-header">
-        <img [src]="member.picture.large" [alt]="member.name.first" />
+  @if (isLoading) {
+    <div class="loading-status">
+      <div class="spinner">
+        <mat-spinner></mat-spinner>
       </div>
-      
-      <div class="card-body">
-        <h3 class="member-name">{{ member.name.first }} {{ member.name.last }}</h3>
-        
-        <p class="member-info"><strong>Edad:</strong> {{ member.dob.age }} años</p>
-        <p class="member-info"><strong>Email:</strong> <span class="truncate">{{ member.email }}</span></p>
-        <p class="member-info"><strong>Teléfono:</strong> {{ member.phone }}</p>
-        
-        <p class="member-location">
-          <strong>Ubicación:</strong><br>
-          {{ member.location.country }} - {{ member.location.state }} - {{ member.location.city }}
-        </p>
-      </div>
+      <p>{{ 'USERS.LOADING' | translate }}</p>
     </div>
+  }
 
-  </div>
+  @if (errorMessage) {
+    <div class="error-message">
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
 
-  <div *ngIf="!isLoading && !errorMessage && filteredMembers.length === 0" class="no-results">
-    <p>No se encontraron miembros que coincidan con la búsqueda.</p>
-  </div>
+  @if (!isLoading && !errorMessage) {
+    <div class="members-grid">
+      @for (member of filteredMembers; track member.email) {
+        <div class="member-card">
+          <div class="card-header">
+            <img [src]="member.picture.large" [alt]="member.name.first" />
+          </div>
+
+          <div class="card-body">
+            <h3 class="member-name">{{ member.name.first }} {{ member.name.last }}</h3>
+            <p class="member-info">
+              <strong>{{ 'USERS.AGE' | translate }}:</strong> {{ member.dob.age }}
+              {{ 'USERS.YEARS' | translate }}
+            </p>
+            <p class="member-info">
+              <strong>{{ 'USERS.EMAIL' | translate }}:</strong>
+              <span class="truncate">{{ member.email }}</span>
+            </p>
+            <p class="member-info">
+              <strong>{{ 'USERS.PHONE' | translate }}:</strong> {{ member.phone }}
+            </p>
+            <p class="member-location">
+              <strong>{{ 'USERS.LOCATION' | translate }}:</strong><br />
+              {{ member.location.country }} - {{ member.location.state }} -
+              {{ member.location.city }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (!isLoading && !errorMessage && filteredMembers.length === 0) {
+    <div class="no-results">
+      <p>{{ 'USERS.NO_RESULTS' | translate }}</p>
+    </div>
+  }
+</div>

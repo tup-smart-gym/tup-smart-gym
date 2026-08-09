@@ -1,10 +1,13 @@
 <h1 class="panel-title">Configuración</h1>
 
 <div class="main-layout">
-
   <header class="top-bar">
-    <button class="btn-menu" (click)="toggleAppInfo()">☰ Info de la App</button>
-    <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+    <button class="btn-menu" (click)="toggleAppInfo()">
+      {{ 'SETTINGS.BUTTON_INFO' | translate }}
+    </button>
+    <button class="btn-logout" (click)="logout()">
+      {{ 'SETTINGS.BUTTON_LOGOUT' | translate }}
+    </button>
   </header>
 
   <main class="main-content">
@@ -13,19 +16,26 @@
 
   <aside class="sidebar" [class.is-open]="showAppInfo">
     <button class="btn-close" (click)="toggleAppInfo()">×</button>
-    
+
     <div class="sidebar-content">
-      <img [src]="gymLogo" alt="Smart Gym Logo" class="large-gym-logo">
+      <img [src]="gymLogo" [alt]="'SETTINGS.LOGO_ALT' | translate" class="large-gym-logo" />
       <h2 class="app-title">{{ appInfo.name }}</h2>
-      <p class="version-text"><strong>Version:</strong> {{ appInfo.version }}</p>
-      
+      <p class="version-text">
+        <strong>{{ 'SETTINGS.VERSION' | translate }}:</strong> {{ appInfo.version }}
+      </p>
+
       <div class="tech-box">
-        <strong>User Agent:</strong>
+        <strong>{{ 'SETTINGS.USER_AGENT' | translate }}:</strong>
         <p class="small-text">{{ appInfo.userAgent }}</p>
       </div>
     </div>
   </aside>
 
-  <div class="dark-overlay" [class.is-visible]="showAppInfo" (click)="toggleAppInfo()"></div>
-
+  <div
+    class="dark-overlay"
+    [class.is-visible]="showAppInfo"
+    (click)="toggleAppInfo()"
+    (keydown.enter)="toggleAppInfo()"
+    tabindex="0"
+  ></div>
 </div>
