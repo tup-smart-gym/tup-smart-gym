@@ -1,9 +1,11 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideAuth0 } from '@auth0/auth0-angular';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideServiceWorker } from '@angular/service-worker';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptors';
 import { errorInterceptor } from './interceptors/error.interceptor';
 
@@ -21,7 +23,12 @@ export const appConfig: ApplicationConfig = {
       cacheLocation: 'localstorage',
       useRefreshTokens: true,
     }),
-    provideHttpClient(withInterceptors([authInterceptor,errorInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, errorInterceptor])),
+    provideTranslateService(),
+    provideTranslateHttpLoader({
+      prefix: '/i18n/',
+      suffix: '.json',
+    }),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

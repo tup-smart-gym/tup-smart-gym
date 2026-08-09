@@ -1,27 +1,54 @@
-import { ChangeDetectorRef, Component,OnInit } from '@angular/core';
-import { UserServices } from '../services/items';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
+import { UserServices } from '../services/items';
+
+export interface Member {
+  id: number;
+  name: {
+    first: string;
+    last: string;
+  };
+  location: {
+    city: string;
+    state: string;
+    country: string;
+  };
+  dob: {
+    age: number;
+  };
+  email: string;
+  phone: string;
+  picture: {
+    large: string;
+    medium: string;
+    thumbnail: string;
+  };
+}
 
 @Component({
   selector: 'app-user',
-  imports: [CommonModule,FormsModule,MatProgressSpinnerModule],
+  imports: [CommonModule, FormsModule, MatProgressSpinnerModule, TranslatePipe],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
 export class UsersComponent implements OnInit {
-  members: any[] = [];
-  filteredMembers: any[] = [];
+  private userService = inject(UserServices);
+  private cdr = inject(ChangeDetectorRef);
 
-  isLoading: boolean = false;
-  errorMessage: string = '';
-  actionMessage: string = '';
+  members: Member[] = [];
+  filteredMembers: Member[] = [];
 
-  filterText: string = '';
-  sortBy: string = '';
+  isLoading = false;
+  errorMessage = '';
+  actionMessage = '';
 
-  showCreateForm: boolean = false;
+  filterText = '';
+  sortBy = '';
+
+  showCreateForm = false;
   newMember = {
     gender: 'male',
     name: { title: 'Mr', first: '', last: '' },
@@ -37,35 +64,32 @@ export class UsersComponent implements OnInit {
     },
   };
 
-  constructor(private userService: UserServices,
-              private cdr: ChangeDetectorRef
-  ){}
   ngOnInit(): void {
     this.loadMembers();
   }
 
-  loadMembers(): void{
+  loadMembers(): void {
     this.isLoading = true;
     this.errorMessage = '';
     const startTime = Date.now();
-    
+
     this.userService.getMembers().subscribe({
       next: (data) => {
-        const duration = Date.now()  - startTime;
-        const remainingTime = Math.max(0,4000 - duration);
+        const duration = Date.now() - startTime;
+        const remainingTime = Math.max(0, 4000 - duration);
 
         setTimeout(() => {
-          this.members = data
+          this.members = data;
           this.filteredMembers = [...data];
           this.isLoading = false;
           this.cdr.detectChanges();
-        },remainingTime)
+        }, remainingTime);
       },
       error: (err) => {
         this.errorMessage = err.message;
         this.isLoading = false;
         this.cdr.detectChanges();
-      }
+      },
     });
   }
 
@@ -75,13 +99,12 @@ export class UsersComponent implements OnInit {
   }
 
   createMember(): void {
-    // dob.date lo completamos automáticamente a partir de la edad, por simplicidad
     if (!this.newMember.dob.date) {
       const year = new Date().getFullYear() - this.newMember.dob.age;
       this.newMember.dob.date = new Date(year, 0, 1).toISOString();
     }
 
-  this.userService.createMember(this.newMember).subscribe({
+    this.userService.createMember(this.newMember).subscribe({
       next: () => {
         this.actionMessage = 'Socio creado correctamente.';
         this.showCreateForm = false;
@@ -94,7 +117,7 @@ export class UsersComponent implements OnInit {
       },
     });
   }
-  
+
   deleteMember(id: number): void {
     if (!confirm('¿Seguro que querés eliminar este socio?')) return;
 
@@ -110,28 +133,29 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  applyFilterAndSort(): void{
+  applyFilterAndSort(): void {
     let result = [...this.members];
 
-    if(this.filterText.trim() !== ''){
+    if (this.filterText.trim() !== '') {
       const search = this.filterText.toLocaleLowerCase().trim();
-      result = result.filter(m =>
-        m.name.first.toLowerCase().includes(search) ||
-        m.name.last.toLowerCase().includes(search) ||
-        m.location.city.toLowerCase().includes(search) ||
-        m.location.country.toLowerCase().includes(search)
+      result = result.filter(
+        (m) =>
+          m.name.first.toLowerCase().includes(search) ||
+          m.name.last.toLowerCase().includes(search) ||
+          m.location.city.toLowerCase().includes(search) ||
+          m.location.country.toLowerCase().includes(search),
       );
     }
 
-    if(this.sortBy !== ''){
-      result.sort((a,b) =>{
-        if(this.sortBy == 'name'){
+    if (this.sortBy !== '') {
+      result.sort((a, b) => {
+        if (this.sortBy === 'name') {
           return a.name.first.localeCompare(b.name.first);
         }
-        if(this.sortBy === 'lastName'){
+        if (this.sortBy === 'lastName') {
           return a.name.last.localeCompare(b.name.last);
         }
-        if(this.sortBy === 'age'){
+        if (this.sortBy === 'age') {
           return a.dob.age - b.dob.age;
         }
         return 0;
