@@ -16,9 +16,26 @@ export class UsersComponent implements OnInit {
 
   isLoading: boolean = false;
   errorMessage: string = '';
+  actionMessage: string = '';
 
   filterText: string = '';
   sortBy: string = '';
+
+  showCreateForm: boolean = false;
+  newMember = {
+    gender: 'male',
+    name: { title: 'Mr', first: '', last: '' },
+    location: { city: '', state: '', country: '' },
+    email: '',
+    dob: { date: '', age: 18 },
+    phone: '',
+    cell: '',
+    picture: {
+      large: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+      medium: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+      thumbnail: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    },
+  };
 
   constructor(private userService: UserServices,
               private cdr: ChangeDetectorRef
@@ -49,6 +66,47 @@ export class UsersComponent implements OnInit {
         this.isLoading = false;
         this.cdr.detectChanges();
       }
+    });
+  }
+
+  toggleCreateForm(): void {
+    this.showCreateForm = !this.showCreateForm;
+    this.actionMessage = '';
+  }
+
+  createMember(): void {
+    // dob.date lo completamos automáticamente a partir de la edad, por simplicidad
+    if (!this.newMember.dob.date) {
+      const year = new Date().getFullYear() - this.newMember.dob.age;
+      this.newMember.dob.date = new Date(year, 0, 1).toISOString();
+    }
+
+  this.userService.createMember(this.newMember).subscribe({
+      next: () => {
+        this.actionMessage = 'Socio creado correctamente.';
+        this.showCreateForm = false;
+        this.loadMembers();
+      },
+      error: (err) => {
+        this.actionMessage = `Error al crear: ${err.status} ${err.statusText}`;
+        console.error(err.error);
+        this.cdr.detectChanges();
+      },
+    });
+  }
+  
+  deleteMember(id: number): void {
+    if (!confirm('¿Seguro que querés eliminar este socio?')) return;
+
+    this.userService.deleteMember(id).subscribe({
+      next: () => {
+        this.actionMessage = 'Socio eliminado correctamente.';
+        this.loadMembers();
+      },
+      error: (err) => {
+        this.actionMessage = `Error al eliminar: ${err.status} ${err.statusText}`;
+        this.cdr.detectChanges();
+      },
     });
   }
 
