@@ -19,7 +19,38 @@
         <option value="age">{{ 'USERS.SORT_AGE' | translate }}</option>
       </select>
     </div>
+    <button (click)="toggleCreateForm()">
+      {{ showCreateForm ? 'Cancelar' : '+ Agregar socio' }}
+    </button>
   </div>
+
+  @if (actionMessage) {
+    <div class="action-message">
+      <span>{{ actionMessage }}</span>
+    </div>
+  }
+
+  @if (showCreateForm) {
+    <div class="create-form">
+      <h3>Nuevo Socio</h3>
+
+      <select [(ngModel)]="newMember.gender">
+        <option value="male">Masculino</option>
+        <option value="female">Femenino</option>
+      </select>
+      <input type="text" placeholder="Título (Mr, Ms...)" [(ngModel)]="newMember.name.title" />
+      <input type="text" placeholder="Nombre" [(ngModel)]="newMember.name.first" />
+      <input type="text" placeholder="Apellido" [(ngModel)]="newMember.name.last" />
+      <input type="number" placeholder="Edad" [(ngModel)]="newMember.dob.age" />
+      <input type="email" placeholder="Email" [(ngModel)]="newMember.email" />
+      <input type="text" placeholder="Teléfono" [(ngModel)]="newMember.phone" />
+      <input type="text" placeholder="Celular" [(ngModel)]="newMember.cell" />
+      <input type="text" placeholder="País" [(ngModel)]="newMember.location.country" />
+      <input type="text" placeholder="Provincia" [(ngModel)]="newMember.location.state" />
+      <input type="text" placeholder="Ciudad" [(ngModel)]="newMember.location.city" />
+      <button (click)="createMember()">Guardar</button>
+    </div>
+  }
 
   @if (isLoading) {
     <div class="loading-status">
@@ -62,6 +93,7 @@
               {{ member.location.country }} - {{ member.location.state }} -
               {{ member.location.city }}
             </p>
+            <button (click)="deleteMember(member.id)" class="delete-btn">Eliminar</button>
           </div>
         </div>
       }

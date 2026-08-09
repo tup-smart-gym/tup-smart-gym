@@ -1,18 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { MembersStateService } from '../services/members-state.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UserServices } from '../services/items';
 
 export interface Member {
+  id: number;
   name: {
     first: string;
     last: string;
   };
   location: {
     city: string;
-    state: string; // Agregado para arreglar el error TS2339
+    state: string;
     country: string;
   };
   dob: {
@@ -21,7 +22,6 @@ export interface Member {
   email: string;
   phone: string;
   picture: {
-    // Le sacamos el "?" para arreglar el error TS2532
     large: string;
     medium: string;
     thumbnail: string;
@@ -35,7 +35,7 @@ export interface Member {
   styleUrl: './user.css',
 })
 export class UsersComponent implements OnInit {
-  private membersState = inject(MembersStateService);
+  private userService = inject(UserServices);
   private cdr = inject(ChangeDetectorRef);
 
   members: Member[] = [];
@@ -43,9 +43,26 @@ export class UsersComponent implements OnInit {
 
   isLoading = false;
   errorMessage = '';
+  actionMessage = '';
 
   filterText = '';
   sortBy = '';
+
+  showCreateForm = false;
+  newMember = {
+    gender: 'male',
+    name: { title: 'Mr', first: '', last: '' },
+    location: { city: '', state: '', country: '' },
+    email: '',
+    dob: { date: '', age: 18 },
+    phone: '',
+    cell: '',
+    picture: {
+      large: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+      medium: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+      thumbnail: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    },
+  };
 
   ngOnInit(): void {
     this.loadMembers();
@@ -56,7 +73,7 @@ export class UsersComponent implements OnInit {
     this.errorMessage = '';
     const startTime = Date.now();
 
-    this.membersState.getMembers().subscribe({
+    this.userService.getMembers().subscribe({
       next: (data) => {
         const duration = Date.now() - startTime;
         const remainingTime = Math.max(0, 4000 - duration);
@@ -71,6 +88,46 @@ export class UsersComponent implements OnInit {
       error: (err) => {
         this.errorMessage = err.message;
         this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+  toggleCreateForm(): void {
+    this.showCreateForm = !this.showCreateForm;
+    this.actionMessage = '';
+  }
+
+  createMember(): void {
+    if (!this.newMember.dob.date) {
+      const year = new Date().getFullYear() - this.newMember.dob.age;
+      this.newMember.dob.date = new Date(year, 0, 1).toISOString();
+    }
+
+    this.userService.createMember(this.newMember).subscribe({
+      next: () => {
+        this.actionMessage = 'Socio creado correctamente.';
+        this.showCreateForm = false;
+        this.loadMembers();
+      },
+      error: (err) => {
+        this.actionMessage = `Error al crear: ${err.status} ${err.statusText}`;
+        console.error(err.error);
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+  deleteMember(id: number): void {
+    if (!confirm('¿Seguro que querés eliminar este socio?')) return;
+
+    this.userService.deleteMember(id).subscribe({
+      next: () => {
+        this.actionMessage = 'Socio eliminado correctamente.';
+        this.loadMembers();
+      },
+      error: (err) => {
+        this.actionMessage = `Error al eliminar: ${err.status} ${err.statusText}`;
         this.cdr.detectChanges();
       },
     });

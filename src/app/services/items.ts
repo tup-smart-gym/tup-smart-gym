@@ -1,52 +1,54 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of,tap, throwError } from 'rxjs';
-import { map } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable,throwError } from 'rxjs';
+
+const API_URL = 'https://smartgymback-production-8639.up.railway.app/users';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserServices {
-  API_URL = 'https://randomuser.me/api/?results=20'
-  cache = 'gym_members';
-  cacheTime = 'gym_members_timestamp';
-  five_minutes = 5 * 60 * 1000;
 
   constructor(private http: HttpClient){}
 
   getMembers(): Observable<any[]> {
-    if (this.isCacheValid()) {
-      const cacheData = localStorage.getItem(this.cache);
-      if(cacheData){
-        return of(JSON.parse(cacheData))
-      }
-    }
-
-    return this.http.get<any>(this.API_URL).pipe(
-      map(response => {
-        return response.results;
-      }),
-      tap(members => {
-        this.saveToCache(members);
-      }),
-      catchError(error => {
-        console.error('Error al obtener datos de la API',error);
-        return throwError(() => new Error('No se pudieron cargar los miembros'));
-      })
+    return this.http.get<any[]>(API_URL).pipe(
+      catchError(this.handleError)
     );
   }
-  private isCacheValid(): boolean{
-    const cachedTime = localStorage.getItem(this.cacheTime);
-    if(!cachedTime) return false;
 
-    const now = new Date().getTime();
-    const age = now - parseInt(cachedTime,10);
-
-    return age < this.five_minutes;
+  getMember(id: number): Observable<any> {
+    return this.http.get<any[]>(`${API_URL}/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  private saveToCache(data: any[]): void{
-    localStorage.setItem(this.cache, JSON.stringify(data));
-    localStorage.setItem(this.cacheTime, new Date().getTime().toString());
+  createMember(member: any): Observable<any> {
+    return this.http.post<any[]>(API_URL, member).pipe(
+      catchError(this.handleError)
+    );
   }
+
+  updateMember(id: number, member: any): Observable<any[]> {
+    return this.http.put<any[]>(`${API_URL}/${id}`,member).pipe(
+      catchError(this.handleError)
+    );
+  }
+  pathcMember(id: number, changes: Partial<any>): Observable<any> {
+    return this.http.patch<any>(`${API_URL}/${id}`,changes).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteMember(id: number): Observable<void>{
+    return this.http.delete<void>(`${API_URL}/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error en la peticion a la API',error);
+    return throwError(() => error);
+  }
+
 }
